@@ -3,14 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Dashboard Admin - ZennxStore</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+    }
+    header {
+      background-color: #111;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    h2 {
+      border-bottom: 1px solid #fff3;
+      padding-bottom: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background-color: #fff1;
+    }
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #fff3;
+    }
+    input, button {
+      padding: 0.5rem;
+      margin: 0.3rem 0;
+      width: 100%;
+    }
+    .logout {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #f88;
+    }
+    .logout:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Dashboard Admin ZennxStore</h1>
+  </header>
+
   <div class="container">
-    <h1>Selamat Datang, Admin!</h1>
-    <p>Anda berhasil login ke dashboard admin ZennxStore.</p>
-    <a href="adminpanel.html">Logout</a>
+    <div class="section">
+      <h2>Daftar Produk</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nama Produk</th>
+            <th>Harga</th>
+            <th>Stok</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="produk-list">
+          <!-- Akan diisi oleh JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Tambah Produk Baru</h2>
+      <form id="form-produk">
+        <input type="text" id="nama" placeholder="Nama produk" required>
+        <input type="number" id="harga" placeholder="Harga" required>
+        <input type="number" id="stok" placeholder="Stok" required>
+        <button type="submit">Tambah Produk</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>Pesanan Masuk</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nama Pembeli</th>
+            <th>Produk</th>
+            <th>Jumlah</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Ana</td><td>Kaos Zennx</td><td>2</td><td>Selesai</td></tr>
+          <tr><td>Budi</td><td>Topi Keren</td><td>1</td><td>Diproses</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a href="adminpanel.html" class="logout">Logout</a>
   </div>
+
+  <script>
+    const produkList = document.getElementById("produk-list");
+    const form = document.getElementById("form-produk");
+
+    let produk = [
+      { nama: "Kaos Zennx", harga: 79000, stok: 15 },
+      { nama: "Topi Keren", harga: 45000, stok: 10 },
+    ];
+
+    function renderProduk() {
+      produkList.innerHTML = "";
+      produk.forEach((p, i) => {
+        produkList.innerHTML += `
+          <tr>
+            <td>${p.nama}</td>
+            <td>Rp ${p.harga.toLocaleString()}</td>
+            <td>${p.stok}</td>
+            <td><button onclick="hapusProduk(${i})">Hapus</button></td>
+          </tr>
+        `;
+      });
+    }
+
+    function hapusProduk(index) {
+      produk.splice(index, 1);
+      renderProduk();
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value;
+      const harga = parseInt(document.getElementById("harga").value);
+      const stok = parseInt(document.getElementById("stok").value);
+      produk.push({ nama, harga, stok });
+      form.reset();
+      renderProduk();
+    });
+
+    renderProduk();
+  </script>
 </body>
 </html>
