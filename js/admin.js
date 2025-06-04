@@ -1,12 +1,20 @@
 
-function loginAdmin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+document.addEventListener("DOMContentLoaded", function () {
+  const loginForm = document.getElementById("loginForm");
 
-    if (username === "adminzennx" && password === "admin123") {
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (username === "adminzennx" && password === "zennx123") {
         alert("Login berhasil!");
-        // Bisa redirect ke halaman dashboard admin di sini jika ada
-    } else {
-        alert("Username atau password salah!");
-    }
-}
+        window.location.href = "dashboard.html"; // ubah sesuai kebutuhan
+      } else {
+        alert("Username atau password salah.");
+      }
+    });
+  }
+});
