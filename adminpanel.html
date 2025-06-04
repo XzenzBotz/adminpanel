@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel - ZennxStore</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      padding: 2rem;
+    }
+    .login-form, .admin-actions {
+      max-width: 400px;
+      margin: auto;
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+      border: none;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-form" id="loginForm">
+    <h2>Login Admin</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div class="admin-actions hidden" id="adminPanel">
+    <h2>Panel Admin</h2>
+    <p>Tambah/Hapus Produk, Ganti Harga, Tandai Sold Out</p>
+    <input type="text" placeholder="Nama Produk" />
+    <input type="text" placeholder="Harga Baru" />
+    <select>
+      <option>Status: Ready</option>
+      <option>Status: Sold Out</option>
+    </select>
+    <button>Perbarui Produk</button>
+    <button style="background:#e53935;">Hapus Produk</button>
+  </div>
+
+  <script>
+    function login() {
+      const u = document.getElementById("username").value;
+      const p = document.getElementById("password").value;
+      if (u === "adminzennx" && p === "zennx123") {
+        document.getElementById("loginForm").classList.add("hidden");
+        document.getElementById("adminPanel").classList.remove("hidden");
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+  </script>
+</body>
+</html>
